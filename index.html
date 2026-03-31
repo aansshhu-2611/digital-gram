@@ -235,7 +235,7 @@
             max-height: 0; overflow: hidden; transition: max-height 0.45s cubic-bezier(0.19,1,0.22,1), padding 0.3s ease;
             font-size: 0.95rem; color: #555; line-height: 1.8; font-weight: 500;
         }
-        .faq-item.open .faq-answer { max-height: 350px; padding-bottom: 1.5rem; }
+        .faq-item.open .faq-answer { max-height: 400px; padding-bottom: 1.5rem; }
 
         /* ─── FLOATING WHATSAPP ─── */
         #wa-float {
@@ -323,17 +323,7 @@
                     <img id="main-logo" src="https://lh3.googleusercontent.com/d/1GgC2i3AZ3aXf5JVZe-UiySBYskR17Kxh" alt="Digital Gram Logo" class="brand-logo">
                 </a>
             </div>
-            <nav class="flex space-x-3 md:space-x-4 items-center">
-                <a href="https://www.facebook.com/profile.php?id=61574356436083" target="_blank" class="block" aria-label="Facebook">
-                    <img src="https://lh3.googleusercontent.com/d/1cVTxbbssY5DSuUoWnSiJdKehTT3GArZC" alt="Facebook" class="social-btn-img">
-                </a>
-                <a href="https://www.instagram.com/digitalgramstudio/" target="_blank" class="block" aria-label="Instagram">
-                    <img src="https://lh3.googleusercontent.com/d/1cVTxbbssY5DSuUoWnSiJdKehTT3GArZC" alt="Instagram" class="social-btn-img">
-                </a>
-                <a href="https://wa.me/918989812254" target="_blank" class="block" aria-label="WhatsApp Message">
-                    <img src="https://lh3.googleusercontent.com/d/1cVTxbbssY5DSuUoWnSiJdKehTT3GArZC" alt="WhatsApp" class="social-btn-img">
-                </a>
-            </nav>
+            <!-- NAVBAR BUTTONS REMOVED AS REQUESTED -->
         </header>
 
         <!-- HERO -->
@@ -496,15 +486,27 @@
                     <div class="space-y-2 text-black">
                         <div class="faq-item reveal">
                             <div class="faq-question" onclick="toggleFaq(this)">How long does it take to see results? <span class="faq-icon"><i data-lucide="plus" class="w-4 h-4"></i></span></div>
-                            <div class="faq-answer">Most brands experience a measurable lift in engagement within 30 days.</div>
+                            <div class="faq-answer">Most brands experience a measurable lift in engagement and profile visits within the first 30 days. Substantial autoridad Compounds over 3–6 months.</div>
                         </div>
                         <div class="faq-item reveal">
                             <div class="faq-question" onclick="toggleFaq(this)">Do you work outside Seoni? <span class="faq-icon"><i data-lucide="plus" class="w-4 h-4"></i></span></div>
-                            <div class="faq-answer">Absolutely. We serve brands across Madhya Pradesh. Fully remote and scalable.</div>
+                            <div class="faq-answer">Absolutely. While we have a strong local network in the Seoni region, we work with brands across Madhya Pradesh. Fully remote and scalable to any location near Seoni.</div>
+                        </div>
+                        <div class="faq-item reveal">
+                            <div class="faq-question" onclick="toggleFaq(this)">What platforms do you manage? <span class="faq-icon"><i data-lucide="plus" class="w-4 h-4"></i></span></div>
+                            <div class="faq-answer">We specialize in Instagram, Facebook, LinkedIn, and YouTube. High-impact visual platforms where storytelling drives commercial value.</div>
+                        </div>
+                        <div class="faq-item reveal">
+                            <div class="faq-question" onclick="toggleFaq(this)">Can I upgrade my plan later? <span class="faq-icon"><i data-lucide="plus" class="w-4 h-4"></i></span></div>
+                            <div class="faq-answer">Absolutely. You can scale up your plan at any time to unlock more content volume or advanced automation features.</div>
                         </div>
                         <div class="faq-item reveal">
                             <div class="faq-question" onclick="toggleFaq(this)">What is included in business automation? <span class="faq-icon"><i data-lucide="plus" class="w-4 h-4"></i></span></div>
-                            <div class="faq-answer">Includes setting up automated replies, lead capture, and daily reporting sequences.</div>
+                            <div class="faq-answer">Includes setting up automated replies, lead capture, daily reporting, inquiry follow-up sequences, and custom workflow integrations.</div>
+                        </div>
+                        <div class="faq-item reveal">
+                            <div class="faq-question" onclick="toggleFaq(this)">Is there a minimum contract period? <span class="faq-icon"><i data-lucide="plus" class="w-4 h-4"></i></span></div>
+                            <div class="faq-answer">We operate on a month-to-month commitment basis. We recommend a 3-month window to truly see the compound effects of brand building.</div>
                         </div>
                     </div>
                 </div>
@@ -593,12 +595,12 @@
             setTimeout(() => {
                 info.scrollIntoView({ behavior: 'smooth' });
                 initObserver();
-                btn.innerHTML = 'Information Revealed!';
+                btn.innerHTML = 'Thank you : )';
             }, 500);
         });
 
         /* ─────────────────────────────────────
-           STAGE 2: PLAN SELECTION (Sent in same row context via identical Lead info)
+           STAGE 2: PLAN SELECTION
         ───────────────────────────────────── */
         async function selectPlan(plan, btnElement) {
             if (isSubmitting) return; 
