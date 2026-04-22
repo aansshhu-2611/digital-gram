@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2M6TYH4ERB"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2M6TYH4ERB');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Gram | Marketing & Automation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Khand:wght@400;500;600;700&display=block');
+    </style>
+    <style>
+        :root {
+            --gold: #fba311;
+            --black: #000;
+            --white: #fff;
+        }
+
+        * { box-sizing: border-box; font-style: normal !important; }
+
+        .dg-khand {
+            font-family: 'Khand', sans-serif !important;
+            font-style: normal !important;
+            font-weight: 700 !important;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            scroll-behavior: smooth;
+            background-color: #000;
+            transition: background-color 0.5s ease;
+            overflow-x: hidden;
+        }
+
+        .font-hindi { font-family: 'Khand', sans-serif; }
+
+        /* ─── INTRO OVERLAY ─── */
+        #intro-overlay {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .ball {
+            position: absolute;
+            width: 28px;
+            height: 28px;
+            background-color: var(--gold);
+            border-radius: 50%;
+            visibility: hidden;
+            will-change: transform;
+        }
+
+        .logo-text-anim {
+            display: flex;
+            font-size: clamp(2rem, 8vw, 5rem);
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -1px;
+            font-family: 'Khand', sans-serif !important;
+        }
+
+        .char { display: inline-block; opacity: 0; transform: translateY(20px); will-change: transform, opacity; }
+        .char-g { color: var(--gold); }
+
+        /* ─── MAIN CONTENT ─── */
+        #main-content {
+            opacity: 0;
+            visibility: hidden;
+            width: 100%;
+        }
+
+        /* ─── NAVBAR ─── */
+        .logo-wrapper {
+            position: relative;
+            height: 70px;
+            width: 200px;
+            display: flex;
+            align-items: center;
+        }
+
+        @media (max-width: 640px) {
+            .logo-wrapper { height: 54px; width: 160px; }
+        }
+
+        .brand-logo {
+            position: absolute;
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+            transition: opacity 0.4s ease;
+            padding: 4px 0;
+        }
+
+        #navbar.scrolled {
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .social-btn-img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1.5px solid transparent;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .social-btn-img:hover {
+            transform: scale(1.1);
+            border-color: var(--gold);
+        }
+
+        /* ─── HERO ─── */
+        .hero-gradient {
+            background: radial-gradient(ellipse at 50% 60%, #1c1c1c 0%, #000 70%);
+        }
+
+        /* ─── REVEAL ANIMATION ─── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.75s ease-out, transform 0.75s ease-out;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ─── BUTTONS ─── */
+        .btn-primary {
+            background-color: var(--gold);
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+        }
+        .btn-primary:hover:not(:disabled) {
+            background-color: #000;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* ─── FORM ─── */
+        .form-input {
+            width: 100%;
+            background: #f9f9f9;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1rem;
+            color: #000;
+            font-size: 0.95rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: #fff;
+            box-shadow: 0 4px 14px rgba(251,163,17,0.12);
+        }
+
+        /* ─── PRICING CARDS ─── */
+        .plan-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 2.5rem 2rem;
+            transition: transform 0.35s cubic-bezier(0.165,0.84,0.44,1), border-color 0.35s ease, box-shadow 0.35s ease;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #e5e7eb;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+        }
+        .plan-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 60px -12px rgba(0,0,0,0.1);
+            border-color: var(--gold);
+        }
+        .plan-card.recommended {
+            border: 2.5px solid var(--gold);
+            box-shadow: 0 15px 45px -10px rgba(251,163,17,0.22);
+        }
+
+        .growth-btn {
+            background: #000;
+            color: #fff;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.8rem;
+            display: block;
+            text-align: center;
+            margin-top: auto;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        .growth-btn:hover:not(:disabled) { background: var(--gold); color: #000; transform: scale(1.02); }
+        .growth-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+        /* ─── FAQ ─── */
+        .faq-item { border-bottom: 1px solid #e5e7eb; overflow: hidden; }
+        .faq-question {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1.5rem 0; cursor: pointer; font-weight: 800; font-size: 0.95rem;
+            text-transform: uppercase; letter-spacing: 0.05em; user-select: none; gap: 1rem;
+            transition: color 0.3s ease;
+        }
+        .faq-question:hover { color: var(--gold); }
+        .faq-icon {
+            flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%;
+            background: #f3f3f3; display: flex; align-items: center; justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .faq-item.open .faq-icon { background: var(--gold); transform: rotate(45deg); color: #000; }
+        .faq-answer {
+            max-height: 0; overflow: hidden; transition: max-height 0.45s cubic-bezier(0.19,1,0.22,1), padding 0.3s ease;
+            font-size: 0.95rem; color: #555; line-height: 1.8; font-weight: 500;
+        }
+        .faq-item.open .faq-answer { max-height: 400px; padding-bottom: 1.5rem; }
+
+        /* ─── FLOATING WHATSAPP ─── */
+        #wa-float {
+            position: fixed; bottom: 24px; right: 24px; z-index: 900;
+            width: 58px; height: 58px; background: #25d366; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 6px 24px rgba(37,211,102,0.45); cursor: pointer;
+            text-decoration: none; transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+            animation: wa-pulse 2.5s infinite;
+        }
+        #wa-float:hover { transform: scale(1.12); animation: none; }
+        @keyframes wa-pulse {
+            0%,100% { box-shadow: 0 6px 24px rgba(37,211,102,0.45), 0 0 0 0 rgba(37,211,102,0.3); }
+            50%      { box-shadow: 0 6px 24px rgba(37,211,102,0.45), 0 0 0 10px rgba(37,211,102,0); }
+        }
+
+        #intro-overlay h1, #hero h1, .dg-khand {
+            font-family: 'Khand', sans-serif !important;
+            font-weight: 700 !important;
+        }
+
+        /* WHO WE ARE CUSTOM STYLE */
+        .wwa-title { font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1; letter-spacing: -0.02em; font-weight: 800; }
+        .wwa-subtitle { color: var(--gold); font-size: clamp(1rem, 2vw, 1.5rem); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2.5rem; }
+        .wwa-text { font-size: 1.125rem; line-height: 1.7; color: #333; margin-bottom: 1.5rem; font-weight: 500; }
+        .wwa-partner-card { background: #000; border-radius: 40px; padding: 3rem 2.5rem; }
+        .wwa-partner-header { color: var(--gold); font-size: 0.75rem; font-weight: 800; letter-spacing: 0.3em; margin-bottom: 2.5rem; text-transform: uppercase; }
+        .partner-item { display: flex; gap: 1rem; align-items: start; margin-bottom: 2rem; }
+        .partner-avatar { width: 48px; height: 48px; border-radius: 50%; overflow: hidden; border: 1.5px solid #333; flex-shrink: 0; }
+        .partner-name { font-size: 1.5rem; font-weight: 800; color: #fff; line-height: 1; margin-bottom: 2px; }
+        .partner-tag { color: #888; font-size: 0.65rem; text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em; }
+        .partner-desc { color: #888; font-size: 0.85rem; line-height: 1.6; margin-top: 0.75rem; font-weight: 400; }
+
+        /* SOCIAL SECTION */
+        .social-grid-item {
+            background: #f9f9f9;
+            border-radius: 20px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+        .social-grid-item:hover {
+            background: #fff;
+            border-color: var(--gold);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .social-grid-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            border: 2px solid #eee;
+            transition: border-color 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-black text-white">
+
+    <!-- WHATSAPP FLOAT -->
+    <a id="wa-float" href="https://wa.me/918889525247" target="_blank" aria-label="Chat on WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+    </a>
+
+    <!-- INTRO -->
+    <div id="intro-overlay">
+        <div class="ball"></div>
+        <h1 class="logo-text-anim">
+            <span class="char">D</span><span class="char">i</span><span class="char">g</span><span class="char">i</span><span class="char">t</span><span class="char">a</span><span class="char">l</span><span class="char char-g">G</span><span class="char">r</span><span class="char">a</span><span class="char">m</span>
+        </h1>
+    </div>
+
+    <div id="main-content">
+        <!-- NAVBAR -->
+        <header class="fixed top-0 left-0 w-full z-50 px-4 md:px-6 py-3 flex justify-between items-center transition-all duration-300" id="navbar">
+            <div class="flex items-center">
+                <a href="#" class="logo-wrapper">
+                    <img id="main-logo" src="https://lh3.googleusercontent.com/d/1GgC2i3AZ3aXf5JVZe-UiySBYskR17Kxh" alt="Digital Gram Logo" class="brand-logo">
+                </a>
+            </div>
+            <!-- NAVBAR BUTTONS REMOVED AS REQUESTED -->
+        </header>
+
+        <!-- HERO -->
+        <section id="hero" class="relative min-h-screen flex flex-col items-center justify-center hero-gradient px-6 pt-24 pb-16 text-center">
+            <p class="reveal text-gray-400 uppercase tracking-[0.4em] text-xs mb-6">Marketing & Automation Agency</p>
+            <div class="reveal mb-6">
+                <img src="https://lh3.googleusercontent.com/d/1gH_MIKIOlUoX2wfGrKUxsrcFgNrzA1fO" alt="DigitalGram" style="max-width: clamp(280px, 75vw, 900px); width: 100%;">
+            </div>
+            <p class="reveal max-w-xl mx-auto text-gray-400 text-base md:text-xl font-light mb-10">
+                Turning local ideas into global legends through thoughtful storytelling and intelligent automation.
+            </p>
+            <div class="reveal">
+                <a href="#contact-section" class="btn-primary text-black font-black px-10 py-4 rounded-full text-xs uppercase tracking-widest inline-block">Start Your Journey</a>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact-section" class="bg-white text-black py-20 px-4 md:px-6 min-h-screen flex items-center">
+            <div class="max-w-5xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+                <div class="reveal">
+                    <h2 class="font-hindi text-5xl md:text-7xl font-bold mb-5 leading-tight uppercase text-black">संपर्क करें<br><span class="text-[#fba311]">Get in Touch</span></h2>
+                    <p class="text-gray-600 text-base md:text-xl font-medium">Fill out the form below to reveal our full suite of services and pricing plans.</p>
+                </div>
+                <div class="reveal bg-white p-6 md:p-10 rounded-[2.5rem] shadow-2xl border border-gray-50">
+                    <form id="contact-form" class="space-y-4">
+                        <input type="text"  name="name"    placeholder="Business / Personal Name" class="form-input" required>
+                        <input type="email" name="email"   placeholder="Email Address"            class="form-input" required>
+                        <input type="tel"   name="phone"   placeholder="Phone Number"             class="form-input" required>
+                        <textarea name="message" rows="3"  placeholder="Tell us about your goals" class="form-input" required></textarea>
+                        <button type="submit" id="submit-lead-btn" class="btn-primary w-full text-black font-black py-5 rounded-2xl uppercase tracking-widest text-sm shadow-xl">
+                            More About Us <i data-lucide="arrow-right" class="inline-block ml-2 w-4 h-4"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- HIDDEN CONTENT -->
+        <div id="revealed-info" class="hidden bg-white text-black">
+            <div class="max-w-7xl mx-auto px-4 md:px-6 py-20">
+                
+                <!-- WHO WE ARE -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-start mb-32">
+                    <div class="reveal text-black">
+                        <h2 class="wwa-title uppercase mb-2">Who We Are</h2>
+                        <h3 class="wwa-subtitle">Digital Roots. Lasting Legacies.</h3>
+                        <div class="wwa-text">
+                            <p class="mb-6"><strong class="text-black">Digital Gram:</strong> The friendly evolution of Seonigram, born in Seoni City, Madhya Pradesh. We fuel brand growth with thoughtful social media, honest storytelling, videos, and creative writing that builds real connections.</p>
+                            <p class="mb-8">Quality drives us. Growth is a journey—we're your guide. Rooted near Seonigram, we transform local ideas into beloved brands.</p>
+                            <p class="text-[#fba311] font-black uppercase text-xs tracking-widest">Your Future Legacy Starts Here.</p>
+                        </div>
+                    </div>
+                    <div class="reveal wwa-partner-card">
+                        <h4 class="wwa-partner-header">Our Network Partner</h4>
+                        <div class="space-y-12">
+                            <div class="partner-item">
+                                <div class="partner-avatar">
+                                    <img src="https://lh3.googleusercontent.com/d/1IiiDzD_J3bm2koBZ1Fhhm4Xq5m-OQTT7" class="w-full h-full object-cover">
+                                </div>
+                                <div class="flex-grow">
+                                    <div class="partner-name uppercase">Seonigram</div>
+                                    <div class="partner-tag">A Digital Gallery</div>
+                                    <p class="partner-desc">Seoni's digital gallery blending nature with modern infrastructure via viral Reels. Thriving on local pride with 131K organic followers.</p>
+                                </div>
+                            </div>
+                            <div class="h-[1px] bg-[#333] w-full"></div>
+                            <div class="partner-item">
+                                <div class="partner-avatar">
+                                    <img src="https://lh3.googleusercontent.com/d/1paOLZkZjlnryhk7MuqUNuJetHWY9rcgH" class="w-full h-full object-cover">
+                                </div>
+                                <div class="flex-grow">
+                                    <div class="partner-name uppercase">Seoni City</div>
+                                    <div class="partner-tag">Brand Growth Partner</div>
+                                    <p class="partner-desc">Seoni's visual hub capturing city growth. Community-first marketing with 82K engaged followers organically.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PRICING -->
+                <div id="pricing-section" class="mb-32">
+                    <div class="text-center mb-16">
+                        <h2 class="text-4xl md:text-6xl font-black uppercase tracking-tighter text-black">SELECT YOUR PATH</h2>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                        <div class="plan-card reveal">
+                            <h4 class="font-black text-2xl uppercase mb-6 tracking-tight text-black">Starter Growth Plan</h4>
+                            <ul class="space-y-4 mb-10 text-[12px] font-bold uppercase flex-grow text-gray-700">
+                                <li>• 4 High Quality Videos</li>
+                                <li>• 4 Posters</li>
+                                <li>• Social Media Management</li>
+                                <li>• Performance Monitoring</li>
+                                <li>• Collaboration Marketing</li>
+                            </ul>
+                            <button onclick="selectPlan('Starter Growth Plan', this)" class="growth-btn">Select Starter</button>
+                        </div>
+                        <div class="plan-card recommended reveal">
+                            <div class="absolute top-4 right-4 bg-[#fba311] text-black text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-tighter">Scale Up</div>
+                            <h4 class="font-black text-2xl uppercase mb-6 tracking-tight text-black">Expansion Plan</h4>
+                            <ul class="space-y-4 mb-10 text-[12px] font-bold uppercase flex-grow text-gray-700">
+                                <li>• 6 High Quality Videos</li>
+                                <li>• 6 Posters</li>
+                                <li>• Social Media Optimization</li>
+                                <li>• Content Strategy</li>
+                                <li>• AI Agent - Growth Report</li>
+                                <li>• Growth Monitoring</li>
+                            </ul>
+                            <button onclick="selectPlan('Brand Expansion Plan', this)" class="growth-btn">Select Expansion</button>
+                        </div>
+                        <div class="plan-card reveal">
+                            <h4 class="font-black text-2xl uppercase mb-6 tracking-tight text-black">Premium Plan</h4>
+                            <ul class="space-y-4 mb-10 text-[12px] font-bold uppercase flex-grow text-gray-700">
+                                <li>• 8 High Quality Videos</li>
+                                <li>• 12 Posters</li>
+                                <li>• Multi Media Management</li>
+                                <li>• Social Media Optimization</li>
+                                <li>• Content Strategy & Collab</li>
+                                <li>• AI Agent Support</li>
+                                <li>• Website Development</li>
+                                <li>• Growth Reports</li>
+                            </ul>
+                            <button onclick="selectPlan('Premium Brand Plan', this)" class="growth-btn">Select Premium</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SOCIAL PAGES -->
+                <div class="mb-32">
+                    <div class="text-center mb-12">
+                        <h4 class="text-xs font-black text-[#fba311] tracking-[0.5em] uppercase mb-4">CONNECT</h4>
+                        <h2 class="wwa-title uppercase leading-none text-black">Our Social Media</h2>
+                    </div>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+                        <a href="https://www.instagram.com/digitalgramstudio/" target="_blank" class="social-grid-item group">
+                            <img src="https://lh3.googleusercontent.com/d/1cVTxbbssY5DSuUoWnSiJdKehTT3GArZC" alt="Instagram" class="social-grid-img">
+                            <span class="text-xs font-black uppercase tracking-widest text-black">Instagram</span>
+                        </a>
+                        <a href="https://www.facebook.com/profile.php?id=61574356436083" target="_blank" class="social-grid-item group">
+                            <img src="https://lh3.googleusercontent.com/d/1cVTxbbssY5DSuUoWnSiJdKehTT3GArZC" alt="Facebook" class="social-grid-img">
+                            <span class="text-xs font-black uppercase tracking-widest text-black">Facebook</span>
+                        </a>
+                        <a href="https://www.linkedin.com/company/112501983" target="_blank" class="social-grid-item group">
+                            <img src="https://lh3.googleusercontent.com/d/1cVTxbbssY5DSuUoWnSiJdKehTT3GArZC" alt="LinkedIn" class="social-grid-img">
+                            <span class="text-xs font-black uppercase tracking-widest text-black">LinkedIn</span>
+                        </a>
+                        <a href="https://www.youtube.com/@DIGIALGRAM" target="_blank" class="social-grid-item group">
+                            <img src="https://lh3.googleusercontent.com/d/1cVTxbbssY5DSuUoWnSiJdKehTT3GArZC" alt="YouTube" class="social-grid-img">
+                            <span class="text-xs font-black uppercase tracking-widest text-black">YouTube</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- FAQ SECTION -->
+                <div class="max-w-4xl mx-auto mb-32 px-4">
+                    <div class="text-center mb-12">
+                        <h4 class="text-xs font-black text-[#fba311] tracking-[0.5em] uppercase mb-4">FAQ</h4>
+                        <h2 class="wwa-title uppercase leading-none text-black">Got Questions?</h2>
+                    </div>
+                    <div class="space-y-2 text-black">
+                        <div class="faq-item reveal">
+                            <div class="faq-question" onclick="toggleFaq(this)">How long does it take to see results? <span class="faq-icon"><i data-lucide="plus" class="w-4 h-4"></i></span></div>
+                            <div class="faq-answer">Most brands experience a measurable lift in engagement and profile visits within the first 30 days. Substantial autoridad Compounds over 3–6 months.</div>
+                        </div>
+                        <div class="faq-item reveal">
+                            <div class="faq-question" onclick="toggleFaq(this)">Do you work outside Seoni? <span class="faq-icon"><i data-lucide="plus" class="w-4 h-4"></i></span></div>
+                            <div class="faq-answer">Absolutely. While we have a strong local network in the Seoni region, we work with brands across Madhya Pradesh. Fully remote and scalable to any location near Seoni.</div>
+                        </div>
+                        <div class="faq-item reveal">
+                            <div class="faq-question" onclick="toggleFaq(this)">What platforms do you manage? <span class="faq-icon"><i data-lucide="plus" class="w-4 h-4"></i></span></div>
+                            <div class="faq-answer">We specialize in Instagram, Facebook, LinkedIn, and YouTube. High-impact visual platforms where storytelling drives commercial value.</div>
+                        </div>
+                        <div class="faq-item reveal">
+                            <div class="faq-question" onclick="toggleFaq(this)">Can I upgrade my plan later? <span class="faq-icon"><i data-lucide="plus" class="w-4 h-4"></i></span></div>
+                            <div class="faq-answer">Absolutely. You can scale up your plan at any time to unlock more content volume or advanced automation features.</div>
+                        </div>
+                        <div class="faq-item reveal">
+                            <div class="faq-question" onclick="toggleFaq(this)">What is included in business automation? <span class="faq-icon"><i data-lucide="plus" class="w-4 h-4"></i></span></div>
+                            <div class="faq-answer">Includes setting up automated replies, lead capture, daily reporting, inquiry follow-up sequences, and custom workflow integrations.</div>
+                        </div>
+                        <div class="faq-item reveal">
+                            <div class="faq-question" onclick="toggleFaq(this)">Is there a minimum contract period? <span class="faq-icon"><i data-lucide="plus" class="w-4 h-4"></i></span></div>
+                            <div class="faq-answer">We operate on a month-to-month commitment basis. We recommend a 3-month window to truly see the compound effects of brand building.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FOOTER -->
+                <footer class="text-center pb-24 border-t border-gray-100 pt-24 text-black">
+                    <p class="text-gray-400 font-bold uppercase text-[10px] tracking-widest mb-3">Ready to lead the market?</p>
+                    <p class="text-3xl font-black tracking-tighter uppercase mb-10 text-black">Let's build your brand together.</p>
+                    <a href="https://wa.me/918889525247" target="_blank" class="btn-primary text-black font-black px-12 py-5 rounded-full text-sm uppercase tracking-widest inline-block shadow-xl">
+                        Chat on WhatsApp <i data-lucide="message-circle" class="inline-block ml-2 w-4 h-4"></i>
+                    </a>
+                </footer>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+        gsap.registerPlugin(ScrollTrigger);
+
+        const scriptURL = 'https://script.google.com/macros/s/AKfycby5-XiCxWwMqxXMJl69iQ2OMuDLYGT0r3-MT1nOL6ndAQQbk5xDPJHh9gLtnjJ2lc6mQA/exec';
+        let currentUserData = {};
+        let isSubmitting = false;
+
+        const tl = gsap.timeline();
+        gsap.set(".ball", { visibility: "visible", scale: 0 });
+        tl.to(".ball", { duration: 0.6, scale: 1, ease: "back.out(2)" })
+          .to(".ball", { duration: 0.5, x: -130, ease: "power3.inOut" }, "+=0.15")
+          .to(".char", { duration: 0.05, opacity: 1, y: 0, stagger: 0.05 })
+          .to("#intro-overlay", { duration: 0.8, y: "-100%", ease: "expo.inOut", delay: 0.5 })
+          .to("#main-content", { duration: 0.4, opacity: 1, visibility: "visible", onComplete: initObserver });
+
+        function initObserver() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        }
+
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            const logo = document.getElementById('main-logo');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+                logo.src = "https://lh3.googleusercontent.com/d/1gGLHJGnwl1a_X2zBXPky06_R-XPygXMK";
+                document.body.style.backgroundColor = '#fff';
+            } else {
+                navbar.classList.remove('scrolled');
+                logo.src = "https://lh3.googleusercontent.com/d/1GgC2i3AZ3aXf5JVZe-UiySBYskR17Kxh";
+                document.body.style.backgroundColor = '#000';
+            }
+        });
+
+        /* ─────────────────────────────────────
+           STAGE 1: LEAD CAPTURE (More About Us)
+        ───────────────────────────────────── */
+        document.getElementById('contact-form').addEventListener('submit', async e => {
+            e.preventDefault();
+            const btn = document.getElementById('submit-lead-btn');
+            const fd = new FormData(e.target);
+            currentUserData = Object.fromEntries(fd.entries());
+
+            btn.disabled = true;
+            btn.innerHTML = 'Revealing Details...';
+
+            // ENTRY STAGE 1: Send initial data to sheet
+            const stage1Params = new URLSearchParams({
+                ...currentUserData,
+                'Growth Plan': 'Revealed Information (Lead)'
+            });
+
+            fetch(scriptURL, { 
+                method: 'POST', 
+                mode: 'no-cors', 
+                body: stage1Params 
+            });
+
+            const info = document.getElementById('revealed-info');
+            info.classList.remove('hidden');
+            
+            setTimeout(() => {
+                info.scrollIntoView({ behavior: 'smooth' });
+                initObserver();
+                btn.innerHTML = 'Thank you : )';
+            }, 500);
+        });
+
+        /* ─────────────────────────────────────
+           STAGE 2: PLAN SELECTION
+        ───────────────────────────────────── */
+        async function selectPlan(plan, btnElement) {
+            if (isSubmitting) return; 
+            isSubmitting = true;
+
+            const originalText = btnElement.innerText;
+            btnElement.disabled = true;
+            btnElement.innerText = 'Processing...';
+
+            const finalPayload = new URLSearchParams({
+                ...currentUserData,
+                'Growth Plan': plan
+            });
+
+            // ENTRY STAGE 2: Send full data with selected plan
+            try {
+                await fetch(scriptURL, { 
+                    method: 'POST', 
+                    mode: 'no-cors', 
+                    body: finalPayload 
+                });
+            } catch (err) {
+                console.error("Submission failed", err);
+            }
+
+            const msg = `🚀 Hey Digital Gram! I've been checking out your work and I'm seriously impressed.\nI'm ready to take my brand to the next level — and I believe the ${plan} is exactly what I need!\n\nName: ${currentUserData.name || 'N/A'}\nPhone: ${currentUserData.phone || 'N/A'}\n\nLet's make something amazing together. 🔥`;
+            
+            window.open(`https://wa.me/918889525247?text=${encodeURIComponent(msg)}`, '_blank');
+            
+            setTimeout(() => {
+                btnElement.disabled = false;
+                btnElement.innerText = originalText;
+                isSubmitting = false;
+            }, 500);
+        }
+
+        function toggleFaq(questionEl) {
+            const item = questionEl.closest('.faq-item');
+            const isOpen = item.classList.contains('open');
+            document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+            if (!isOpen) item.classList.add('open');
+            lucide.createIcons();
+        }
+    </script>
+</body>
+</html>
